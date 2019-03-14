@@ -30,7 +30,6 @@ class HomeComponent extends Component{
     render() {
         return (
             <React.Fragment>
-                
                 <h1>Home Component</h1>
                 {
                     this.state.launches.map((launch) => 
@@ -39,8 +38,6 @@ class HomeComponent extends Component{
                         </div>
                     )
                 }
-       
-
             </React.Fragment>
         );
     }

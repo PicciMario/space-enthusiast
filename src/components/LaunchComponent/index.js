@@ -34,7 +34,10 @@ class LaunchComponent extends React.Component{
             <h1>LaunchComponent {this.state.launchID}</h1>
             {
                 this.state.launchData && this.state.launchData.launches && this.state.launchData.launches.length > 0 &&
+                <React.Fragment>
                 <h2>{this.state.launchData.launches[0].name}</h2>
+                <img src={this.state.launchData.launches[0].rocket.imageURL} style={{width: '100%'}}></img>
+                </React.Fragment>
                 
             }
             </React.Fragment>
