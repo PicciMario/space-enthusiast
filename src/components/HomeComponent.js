@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom'
 
 class HomeComponent extends Component{
 
@@ -21,7 +22,7 @@ class HomeComponent extends Component{
         })
         .then((data) => {
             console.log(data);
-            this.setState({launches: data.launches.map(element => element.name)});
+            this.setState({launches: data.launches});
         })
     }
 
@@ -32,7 +33,11 @@ class HomeComponent extends Component{
                 
                 <h1>Home Component</h1>
                 {
-                    this.state.launches.map((launch) => <div>{launch}</div>)
+                    this.state.launches.map((launch) => 
+                        <div onClick={() => this.props.history.push('/launch/' + launch.id)}>
+                            {launch.name}
+                        </div>
+                    )
                 }
        
 

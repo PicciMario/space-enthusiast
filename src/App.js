@@ -6,9 +6,10 @@ import {
     Link
 } from 'react-router-dom';
 
-import HomeComponent from './HomeComponent';
-import AboutComponent from './AboutComponent';
-import TeamComponent from './TeamComponent';
+import HomeComponent from './components/HomeComponent';
+import AboutComponent from './components/AboutComponent';
+import TeamComponent from './components/TeamComponent';
+import LaunchComponent from './components/LaunchComponent';
 
 class App extends Component {
     render(){
@@ -31,6 +32,7 @@ class App extends Component {
                 <Route exact path='/' component={HomeComponent}></Route>
                 <Route exact path='/about' component={AboutComponent}></Route>
                 <Route exact path='/team' component={TeamComponent}></Route>
+                <Route path='/launch/:launchID' component={LaunchComponent}></Route>
 
             </div>
             </Router>
