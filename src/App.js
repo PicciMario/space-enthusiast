@@ -6,14 +6,13 @@ import {
     Link
 } from 'react-router-dom';
 
-import Page from './components/Page'
-
 import HomeComponent from './components/HomePage/';
 import AboutComponent from './components/AboutComponent';
 import TeamComponent from './components/TeamComponent';
 import LaunchComponent from './components/LaunchComponent/';
 
 class App extends Component {
+
     render(){
         return (
             <Router>

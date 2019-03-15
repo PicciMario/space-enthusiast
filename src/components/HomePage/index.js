@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
+import * as LaunchLibrary from '../LaunchLibrary'
 
 class HomeComponent extends Component{
 
@@ -14,18 +15,11 @@ class HomeComponent extends Component{
     }
 
     componentDidMount(){
-        fetch(
-            'https://launchlibrary.net/1.4/launch?next=5'
-        )        
+        LaunchLibrary.nextLaunches(10)
         .then((data) => {
-            return data.json();
-        })
-        .then((data) => {
-            console.log(data);
             this.setState({launches: data.launches});
         })
     }
-
 
     render() {
         return (
@@ -33,7 +27,7 @@ class HomeComponent extends Component{
                 <h1>Home Component</h1>
                 {
                     this.state.launches.map((launch) => 
-                        <div onClick={() => this.props.history.push('/launch/' + launch.id)}>
+                        <div onClick={() => this.props.history.push('/launch/' + launch.id)} key={launch.id}>
                             {launch.name}
                         </div>
                     )

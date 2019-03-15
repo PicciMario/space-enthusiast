@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import * as LaunchLibrary from '../LaunchLibrary';
 
 class LaunchComponent extends React.Component{
 
@@ -8,38 +9,60 @@ class LaunchComponent extends React.Component{
         super(props);
 
         this.state = {
-            launchID: this.props.match.params.launchID,
-            launchData: null
+            launchData: null,
+            error: false,
+            loading: true
         }
 
     }
 
-    
     componentDidMount(){
-        fetch(
-            'https://launchlibrary.net/1.4/launch/' + this.state.launchID
-        )        
-        .then((data) => {
-            return data.json();
-        })
-        .then((data) => {
-            console.log(data);
-            this.setState({launchData: data});
-        })
+        LaunchLibrary
+            .launchByID(this.props.match.params.launchID)
+            .then((data) => {
+                if (data && data.launches && data.launches.length > 0){
+                    this.setState({
+                        launchData: data.launches[0],
+                        error: false,
+                        loading: false
+                    })
+                }
+                else {
+                    this.setState({
+                        launchData: null,
+                        error: true,
+                        loading: false
+                    })
+                }
+            })
+            .catch(e => {
+                console.error(e);
+                this.setState({
+                    launchData: null,
+                    error: true,
+                    loading: false
+                })                
+            })
     }
 
     render(){
+
+        let {launchData, loading, error} = this.state;
+
+        if (loading || !launchData){
+            return <div>Loading...</div>
+        }
+
+        if (error){
+            return <div>Loading error.</div>
+        }
+
         return (
             <React.Fragment>
-            <h1>LaunchComponent {this.state.launchID}</h1>
-            {
-                this.state.launchData && this.state.launchData.launches && this.state.launchData.launches.length > 0 &&
-                <React.Fragment>
-                <h2>{this.state.launchData.launches[0].name}</h2>
-                <img src={this.state.launchData.launches[0].rocket.imageURL} style={{width: '100%'}}></img>
-                </React.Fragment>
-                
-            }
+            <h1>LaunchComponent {launchData.launchID}</h1>
+            <h2>{launchData.name}</h2>
+            <div>NET: {launchData.net}</div>
+            <img src={launchData.rocket.imageURL} style={{width: '100%'}}></img>
             </React.Fragment>
 
         );
