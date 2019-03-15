@@ -17,14 +17,6 @@ class App extends Component {
 
     render(){
 
-        let buttonStyle = {
-            border: '1px solid black',
-            padding: 5,
-            flexGrow: 1,
-            textAlign: 'center',
-            textDecoration: 'none'
-        }
-
         return (
             <Router>
             <div className='app-container'>
@@ -39,15 +31,15 @@ class App extends Component {
                 <div className='tab-bar'>
 
                     <Link to="/" className='tab-bar-button'>
-                        Home
+                        <span>Home</span>
                     </Link>   
                     
                     <Link to="/about" className='tab-bar-button'>
-                        About
+                        <span>About</span>
                     </Link>      
 
                     <Link to="/team" className='tab-bar-button'>
-                        Team
+                        <span>Team</span>
                     </Link>                                 
 
                 </div>                
