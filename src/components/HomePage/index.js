@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
 import * as LaunchLibrary from '../LaunchLibrary'
+import Launch from './Launch'
 
 class HomeComponent extends Component{
 
@@ -28,7 +29,7 @@ class HomeComponent extends Component{
                 {
                     this.state.launches.map((launch) => 
                         <div onClick={() => this.props.history.push('/launch/' + launch.id)} key={launch.id}>
-                            {launch.name}
+                            <Launch launch={launch}/>
                         </div>
                     )
                 }
