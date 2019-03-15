@@ -19,7 +19,7 @@ export default function Launch(props){
                 border: '1px solid black',
                 borderRadius: 5,
                 marginBottom: 2,
-                cursor: 'pointer'
+                cursor: 'pointer',
             }}
         >
             
