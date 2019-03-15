@@ -8,7 +8,7 @@ import {
 
 import Page from './components/Page'
 
-import HomeComponent from './components/HomeComponent';
+import HomeComponent from './components/HomePage/';
 import AboutComponent from './components/AboutComponent';
 import TeamComponent from './components/TeamComponent';
 import LaunchComponent from './components/LaunchComponent/';
