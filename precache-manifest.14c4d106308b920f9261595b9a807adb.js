@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/space-enthusiast/static/css/main.97f4a988.chunk.css"
   },
   {
-    "revision": "6a803783cfdac9a394b4890ef5c023bb",
+    "revision": "9591b0ca0cf2f4e7c4e285a819163676",
     "url": "/space-enthusiast/index.html"
   }
 ];
