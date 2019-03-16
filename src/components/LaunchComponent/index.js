@@ -1,6 +1,7 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import * as LaunchLibrary from '../LaunchLibrary';
+import Page from '../Components/Page';
 
 class LaunchComponent extends React.Component{
 
@@ -17,6 +18,7 @@ class LaunchComponent extends React.Component{
     }
 
     componentDidMount(){
+        
         LaunchLibrary
             .launchByID(this.props.match.params.launchID)
             .then((data) => {
@@ -25,7 +27,7 @@ class LaunchComponent extends React.Component{
                         launchData: data.launches[0],
                         error: false,
                         loading: false
-                    })
+                    });
                 }
                 else {
                     this.setState({
@@ -34,6 +36,7 @@ class LaunchComponent extends React.Component{
                         loading: false
                     })
                 }
+
             })
             .catch(e => {
                 console.error(e);
@@ -49,23 +52,31 @@ class LaunchComponent extends React.Component{
 
         let {launchData, loading, error} = this.state;
 
+        let pageContent = null;
+
         if (loading || !launchData){
-            return <div>Loading...</div>
+            pageContent = <div>Loading...</div>
+        }
+        else if (error){
+            pageContent = <div>Loading error.</div>
+        }
+        else {
+            pageContent =         
+                <React.Fragment>
+                <h1>LaunchComponent {launchData.launchID}</h1>
+                <h2>{launchData.name}</h2>
+                <div>Provider: {launchData.lsp.name}</div>
+                <div>NET: {launchData.net}</div>
+                <img src={launchData.rocket.imageURL} style={{width: '100%'}}></img>
+                </React.Fragment>
         }
 
-        if (error){
-            return <div>Loading error.</div>
-        }
-
-        return (
-            <React.Fragment>
-            <h1>LaunchComponent {launchData.launchID}</h1>
-            <h2>{launchData.name}</h2>
-            <div>NET: {launchData.net}</div>
-            <img src={launchData.rocket.imageURL} style={{width: '100%'}}></img>
-            </React.Fragment>
-
+        return(
+            <Page title="Launch">
+                {pageContent}
+            </Page>
         );
+
     }
 
 }

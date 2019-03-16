@@ -3,18 +3,82 @@
     margin: 0
 }
 
+h1{
+
+}
+
+/* Contenitore globale applicazione */
 .app-container{
     display: flex;
     flex-direction: column;
 }
 
+/* Contenitore pagina */
+.page-container{
+    flex-grow: 1;
+    overflow-Y: scroll;
+    margin-left: 5px;
+    margin-right: 5px;    
+}
+
+/* ----- Barra pulsanti top ------------------------------------------------ */
+
+/* Header bar */
+.header-bar{
+    display: flex;
+    flex-direction: row;
+    height: 5%;
+    min-height: 40px;
+    border: 1px solid black;
+}
+
+.header-bar-left{
+
+    width: 10%;
+    min-width: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.header-bar-content{
+
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.header-bar-right{
+    
+    width: 10%;
+    min-width: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* ----- Barra pulsanti bottom --------------------------------------------- */
+
+/* Tab bar */
 .tab-bar{
     display: flex;
     flex-direction: row;
     padding-top: 5px;
-    min-height: 10%;
+    height: 8%;
+    min-height: 60px;
 }
 
+/* Link nella tab bar */
 .tab-bar-button{
     height: calc(100% - 2px);
     border: 1px solid black;
@@ -24,16 +88,21 @@
     text-decoration: none;
 }
 
-.tab-bar-button span{
-    display:flex;
+/* Div interno alla tab bar */
+.tab-bar-button div{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: navy;
+    color: black;
 }
 
-.page-container{
-    flex-grow: 1;
-    overflow-Y: scroll;
-    margin-left: 5px;
-    margin-right: 5px;    
+/* Icona pulsante tab bar */
+.tab-bar-button div .tab-bar-button-icon{
+    font-size: 2em;
+}
+
+/* Testo pulsante tab bar */
+.tab-bar-button div .tab-bar-button-title{
+    font-size: 0.7em;
 }

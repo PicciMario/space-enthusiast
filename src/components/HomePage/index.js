@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom'
-import * as LaunchLibrary from '../LaunchLibrary'
-import Launch from './Launch'
+import * as LaunchLibrary from '../LaunchLibrary';
+import Launch from './Launch';
+import Page from '../Components/Page';
 
 class HomeComponent extends Component{
 
@@ -23,18 +23,21 @@ class HomeComponent extends Component{
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <h1>Home Component</h1>
+
+        return(
+            <Page title="Space Enthusiast">
+                <h1>Space Enthusiast</h1>
+                <h3>Upcoming launches:</h3>
                 {
                     this.state.launches.map((launch) => 
                         <div onClick={() => this.props.history.push('/launch/' + launch.id)} key={launch.id}>
                             <Launch launch={launch}/>
                         </div>
                     )
-                }
-            </React.Fragment>
+                }            
+            </Page>
         );
+
     }
     
 }

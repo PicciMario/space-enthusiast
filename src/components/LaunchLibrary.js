@@ -11,3 +11,8 @@ export function nextLaunches(num){
     return RestCache
         .retrieveUrl(baseUrl + '/launch?next=' + num);
 }
+
+export function providerByID(num){
+    return RestCache
+        .retrieveUrl(baseUrl + '/launch/agency/' + num);
+}
