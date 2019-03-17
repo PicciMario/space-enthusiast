@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from "react-redux";
+import store from './redux/store'
+
 import {Router} from 'react-router-dom';
 import History from './services/History';
 
 ReactDOM.render(
-    <Router history={History}>
-        <App />
-    </Router>,
+    <Provider store={store}>
+        <Router history={History}>
+            <App />
+        </Router>
+    </Provider>,
     document.getElementById('root')
 );
 

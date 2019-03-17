@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import * as LaunchLibrary from '../../services/LaunchLibrary';
+import { connect } from "react-redux";
 import Agency from './Agency';
 import Page from '../BasePage/';
 import LoadingComponent from '../LoadingComponent';
+import * as Actions from '../../redux/actions';
 
 class AgenciesPage extends Component{
 
@@ -12,72 +13,16 @@ class AgenciesPage extends Component{
 
         this.state = {
 
-            // Full list
-            agencies: [],
-
-            // Last record number received from API
-            lastRecordReceived: 0,
-
-            // Total records as declared by API
-            totalRecords: 0,
-
-            // True if error while loading
-            error: false,
-
-            // True if loading first chunk
-            loading: true,
-
             // Actual filter string
             filterString: ''
+
         }
 
     }
 
     componentDidMount(){
-        this.loadAgencies();
-    }
-
-    loadAgencies = (offset) => {
-
-        LaunchLibrary
-            .agencies(offset)
-            .then((data) => {
-                if (data && data.agencies){
-                    let newState = {
-                        agencies: [...data.agencies, ...this.state.agencies],
-                        error: false,
-                        loading: false,
-                        lastRecordReceived: Number(data.offset) + Number(data.count),
-                        totalRecords: Number(data.total)
-                    };
-                    console.log(newState)
-                    this.setState(
-                        newState,
-                        () => {
-                            if (this.state.lastRecordReceived < this.state.totalRecords){
-                                console.log('last record: ' + this.state.lastRecordReceived + ", totalRecords: " + this.state.totalRecords)
-                                this.loadAgencies(this.state.lastRecordReceived);
-                            }
-                        }
-                    );
-                }
-                else {
-                    this.setState({
-                        agencies: null,
-                        error: true,
-                        loading: false
-                    })
-                }
-
-            })
-            .catch(e => {
-                console.error(e);
-                this.setState({
-                    agencies: null,
-                    error: true,
-                    loading: false
-                })                
-            })        
+        // Tells redux to retrieve agencies list (if needed)
+        this.props.retrieveAgencies();
     }
 
     manageFilterChange = (e) => {
@@ -108,33 +53,37 @@ class AgenciesPage extends Component{
             </button>
         </div>   
         
-    fixedFooter = () => 
-    <div
-        style={{
-            display: 'flex',
-            flexDirection: 'row',
-            fontSize: '0.7em',
-            color: 'gray'
-        }}
-    >   
-        Total count: {this.state.totalRecords} (loaded: {this.state.lastRecordReceived})
-    </div>        
+    fixedFooter = () => {
+
+        let {totalRecords, lastRecordReceived} = this.props.agencies;
+
+        return(
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    fontSize: '0.7em',
+                    color: 'gray'
+                }}
+            >   
+                Total count: {totalRecords} (loaded: {lastRecordReceived})
+            </div>        
+        );
+    }
     
     render() {
 
-        let {agencies, loading, error, filterString} = this.state;
+        let {list} = this.props.agencies;
+        let {filterString} = this.state;
 
         let pageContent = null;
 
-        if (loading || !agencies){
+        if (list.length === 0){
             pageContent = <LoadingComponent/>
-        }
-        else if (error){
-            pageContent = <div>Loading error.</div>
         }
         else {
             pageContent =         
-                agencies
+                list
                 .filter((agency) => filterString.length === 0 || agency.name.toUpperCase().startsWith(filterString.toUpperCase()))
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((agency) => 
@@ -154,4 +103,16 @@ class AgenciesPage extends Component{
     
 }
 
-export default AgenciesPage;
+const mapStateToProps = state => {
+    return { 
+        agencies: state.agencies 
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { 
+        addAgencies: Actions.addAgencies,
+        retrieveAgencies: Actions.retrieveAgencies
+    }
+)(AgenciesPage);

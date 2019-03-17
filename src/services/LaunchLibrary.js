@@ -1,5 +1,4 @@
 import RestCache from './RestCache';
-import { Url } from 'url';
 
 const baseUrl = 'https://launchlibrary.net/1.4';
 

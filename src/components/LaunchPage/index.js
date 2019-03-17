@@ -67,7 +67,7 @@ class LaunchComponent extends React.Component{
                 <h2>{launchData.name}</h2>
                 <div>Provider: {launchData.lsp.name}</div>
                 <div>NET: {launchData.net}</div>
-                <img src={launchData.rocket.imageURL} style={{width: '100%'}}></img>
+                <img src={launchData.rocket.imageURL} style={{width: '100%'}} alt={launchData.name}></img>
                 </React.Fragment>
         }
 
