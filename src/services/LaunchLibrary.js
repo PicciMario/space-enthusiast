@@ -1,4 +1,5 @@
 import RestCache from './RestCache';
+import { Url } from 'url';
 
 const baseUrl = 'https://launchlibrary.net/1.4';
 
@@ -7,9 +8,12 @@ export function nextLaunches(num){
         .retrieveUrl(baseUrl + '/launch?next=' + num);
 }
 
-export function agencies(){
+export function agencies(offset){
+    let url = new URL(baseUrl + '/agency');
+    url.searchParams.append('mode', 'list');
+    if (offset != null) url.searchParams.append('offset', offset);
     return RestCache
-        .retrieveUrl(baseUrl + '/agency');
+        .retrieveUrl(url);
 }
 
 export function launchByID(id){
