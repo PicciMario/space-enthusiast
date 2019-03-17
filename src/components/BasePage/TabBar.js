@@ -14,17 +14,17 @@ export default function TabBar(props){
                 </div>
             </Link>   
             
-            <Link to="/about" className='tab-bar-button'>
+            <Link to="/agencies" className='tab-bar-button'>
                 <div>
-                    <span className='tab-bar-button-icon'><FontAwesomeIcon icon="rocket"/></span>
-                    <span className='tab-bar-button-title'>Home</span>
+                    <span className='tab-bar-button-icon'><FontAwesomeIcon icon="building"/></span>
+                    <span className='tab-bar-button-title'>Agencies</span>
                 </div>
             </Link>      
 
-            <Link to="/team" className='tab-bar-button'>
+            <Link to="/about" className='tab-bar-button'>
                 <div>
-                    <span className='tab-bar-button-icon'><FontAwesomeIcon icon="rocket"/></span>
-                    <span className='tab-bar-button-title'>Home</span>
+                    <span className='tab-bar-button-icon'><FontAwesomeIcon icon="info"/></span>
+                    <span className='tab-bar-button-title'>About</span>
                 </div>
             </Link>                                 
 

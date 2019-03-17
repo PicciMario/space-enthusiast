@@ -1,7 +1,7 @@
 
 import React from 'react';
-import * as LaunchLibrary from '../LaunchLibrary';
-import Page from '../Components/Page';
+import * as LaunchLibrary from '../../services/LaunchLibrary';
+import Page from '../BasePage/';
 
 class LaunchComponent extends React.Component{
 

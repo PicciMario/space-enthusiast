@@ -1,5 +1,5 @@
 import React from 'react';
-import History from '../../History';
+import History from '../../services/History';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

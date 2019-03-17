@@ -6,15 +6,15 @@ import {
 
 import './App.css'
 
-import HomeComponent from './components/HomePage/';
-import AboutComponent from './components/AboutComponent';
-import TeamComponent from './components/TeamComponent';
-import LaunchComponent from './components/LaunchComponent/';
+import HomePage from './components/HomePage/';
+import AboutPage from './components/AboutPage/';
+import LaunchPage from './components/LaunchPage/';
+import AgenciesPage from './components/AgenciesPage/';
 
 // ##### Costruzione libreria icone FontAwesome ###############################
 import {library } from '@fortawesome/fontawesome-svg-core'
-import {faHome, faRocket, faChevronLeft, faInfo} from '@fortawesome/free-solid-svg-icons'
-library.add(faHome, faRocket, faChevronLeft, faInfo);
+import {faHome, faRocket, faChevronLeft, faInfo, faBuilding} from '@fortawesome/free-solid-svg-icons'
+library.add(faHome, faRocket, faChevronLeft, faInfo, faBuilding);
 // ############################################################################
 
 class App extends Component {
@@ -23,10 +23,10 @@ class App extends Component {
 
         return (
             <div className='app-container'>
-                <Route exact path='/' component={HomeComponent}></Route>
-                <Route exact path='/about' component={AboutComponent}></Route>
-                <Route exact path='/team' component={TeamComponent}></Route>
-                <Route path='/launch/:launchID' component={LaunchComponent}></Route>
+                <Route exact path='/' component={HomePage}></Route>
+                <Route exact path='/about' component={AboutPage}></Route>
+                <Route exact path='/agencies' component={AgenciesPage}></Route>
+                <Route path='/launch/:launchID' component={LaunchPage}></Route>
             </div>
         )
     }
