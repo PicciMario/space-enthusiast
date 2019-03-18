@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import Page from '../BasePage/';
 import * as Actions from '../../redux/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class AgencyPage extends React.Component{
 
@@ -20,6 +21,27 @@ class AgencyPage extends React.Component{
         let {agencyID} = this.props.match.params;
         this.props.retrieveAgency(agencyID);
         this.props.retrieveAgencyTypes();
+    }
+
+    urlComponent(rawUrl){
+        
+        let url = new URL(rawUrl);
+        
+        let icon = <FontAwesomeIcon icon='link'/>;;
+        if (url.hostname === 'www.youtube.com') icon=<FontAwesomeIcon icon={['fab', 'youtube']}/>;
+        if (url.hostname === 'en.wikipedia.org') icon=<FontAwesomeIcon icon={['fab', 'wikipedia-w']}/>;
+        if (url.hostname === 'twitter.com') icon=<FontAwesomeIcon icon={['fab', 'twitter']}/>;
+
+        return (
+            <div key={url}>
+                <a href={rawUrl} target="_blank" rel="noopener noreferrer">
+                    <span style={{whiteSpace: 'nowrap', display: 'block', textOverflow: 'ellipsis', overflow: 'hidden', verticalAlign: 'middle', lineHeight: '1.5em'}}>
+                        {icon} {rawUrl}
+                    </span>
+                </a>
+            </div>
+        );
+
     }
 
     render(){
@@ -41,14 +63,11 @@ class AgencyPage extends React.Component{
                 <h2>{name}</h2>
                 <div>Abbreviation: {abbrev}</div>
                 <div>Country: {countryCode}</div>
-                <div>Type: {type}</div>
                 <div>Is launch provider: {islsp}</div>
                 <div>Type: {this.props.agencies.types[type]}</div>
-                <div><a href={wikiURL} target="_blank">Wikipedia entry</a></div>
+                {this.urlComponent(wikiURL)}
                 {
-                    infoURLs.map((url, index) => 
-                        <div key={'url'+index}><a href={url} target="_blank">{url}</a></div>
-                    )
+                    infoURLs.map((rawUrl) => this.urlComponent(rawUrl))
                 }
                 </React.Fragment>
 

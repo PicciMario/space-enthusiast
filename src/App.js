@@ -13,9 +13,17 @@ import AgenciesPage from './components/AgenciesPage/';
 import AgencyPage from './components/AgencyPage/';
 
 // ##### Costruzione libreria icone FontAwesome ###############################
-import {library } from '@fortawesome/fontawesome-svg-core'
-import {faHome, faRocket, faChevronLeft, faInfo, faBuilding} from '@fortawesome/free-solid-svg-icons'
-library.add(faHome, faRocket, faChevronLeft, faInfo, faBuilding);
+
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink} from '@fortawesome/free-solid-svg-icons';
+import {faYoutube, faWikipediaW, faTwitter} from '@fortawesome/free-brands-svg-icons';
+library.add(
+    faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink,
+    faYoutube, faWikipediaW, faTwitter
+);
+
+console.log(library)
+
 // ############################################################################
 
 class App extends Component {
