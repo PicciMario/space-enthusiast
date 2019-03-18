@@ -15,6 +15,12 @@ export function agencies(offset){
         .retrieveUrl(url);
 }
 
+export function agencyByID(id){
+    console.warn('agencyByID')
+    return RestCache
+        .retrieveUrl(baseUrl + '/agency/' + id);
+}
+
 export function launchByID(id){
     return RestCache
         .retrieveUrl(baseUrl + '/launch/' + id);

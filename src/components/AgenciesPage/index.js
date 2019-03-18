@@ -87,7 +87,7 @@ class AgenciesPage extends Component{
                 .filter((agency) => filterString.length === 0 || agency.name.toUpperCase().startsWith(filterString.toUpperCase()))
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((agency) => 
-                    <div onClick={() => this.props.history.push('/launch/' + agency.id)} key={agency.id}>
+                    <div key={agency.id}>
                         <Agency agency={agency}/>
                     </div>
                 )

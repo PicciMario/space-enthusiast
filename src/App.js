@@ -10,6 +10,7 @@ import HomePage from './components/HomePage/';
 import AboutPage from './components/AboutPage/';
 import LaunchPage from './components/LaunchPage/';
 import AgenciesPage from './components/AgenciesPage/';
+import AgencyPage from './components/AgencyPage/';
 
 // ##### Costruzione libreria icone FontAwesome ###############################
 import {library } from '@fortawesome/fontawesome-svg-core'
@@ -26,6 +27,7 @@ class App extends Component {
                 <Route exact path='/' component={HomePage}></Route>
                 <Route exact path='/about' component={AboutPage}></Route>
                 <Route exact path='/agencies' component={AgenciesPage}></Route>
+                <Route path='/agency/:agencyID' component={AgencyPage}></Route>
                 <Route path='/launch/:launchID' component={LaunchPage}></Route>
             </div>
         )

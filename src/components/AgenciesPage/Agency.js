@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import history from '../../services/History'
 
 Agency.propTypes={
     agency: PropTypes.object.isRequired
@@ -21,6 +22,7 @@ export default function Agency(props){
                 marginBottom: 2,
                 cursor: 'pointer',
             }}
+            onClick={() => history.push('/agency/' + agency.id)}
         >
             
             <div
