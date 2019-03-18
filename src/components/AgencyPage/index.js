@@ -1,7 +1,8 @@
 
 import React from 'react';
-import * as LaunchLibrary from '../../services/LaunchLibrary';
+import { connect } from "react-redux";
 import Page from '../BasePage/';
+import * as Actions from '../../redux/actions';
 
 class AgencyPage extends React.Component{
 
@@ -10,67 +11,52 @@ class AgencyPage extends React.Component{
         super(props);
 
         this.state = {
-            agencyData: null,
-            error: false,
-            loading: true
+
         }
 
     }
 
     componentDidMount(){
-
         let {agencyID} = this.props.match.params;
-        
-        LaunchLibrary
-            .agencyByID(agencyID)
-            .then((data) => {
-                if (data && data.agencies && data.agencies.length > 0){
-                    this.setState({
-                        agencyData: data.agencies[0],
-                        error: false,
-                        loading: false
-                    });
-                }
-                else {
-                    this.setState({
-                        agencyData: null,
-                        error: true,
-                        loading: false
-                    })
-                }
-
-            })
-            .catch(e => {
-                console.error(e);
-                this.setState({
-                    agencyData: null,
-                    error: true,
-                    loading: false
-                })                
-            })
+        this.props.retrieveAgency(agencyID);
+        this.props.retrieveAgencyTypes();
     }
 
     render(){
 
-        let {agencyData, loading, error} = this.state;
+        let {agencyID} = this.props.match.params;
+        let agencyData = this.props.agencies.details[agencyID];
 
         let pageContent = null;
-
-        if (loading || !agencyData){
+        let footer = null;
+        if (!agencyData){
             pageContent = <div>Loading...</div>
         }
-        else if (error){
-            pageContent = <div>Loading error.</div>
-        }
         else {
+
+            let {name, abbrev, countryCode, islsp, type, wikiURL, changed, infoURLs} = agencyData;
+
             pageContent =         
                 <React.Fragment>
-                <h2>{agencyData.name}</h2>
+                <h2>{name}</h2>
+                <div>Abbreviation: {abbrev}</div>
+                <div>Country: {countryCode}</div>
+                <div>Type: {type}</div>
+                <div>Is launch provider: {islsp}</div>
+                <div>Type: {this.props.agencies.types[type]}</div>
+                <div><a href={wikiURL} target="_blank">Wikipedia entry</a></div>
+                {
+                    infoURLs.map((url, index) => 
+                        <div key={'url'+index}><a href={url} target="_blank">{url}</a></div>
+                    )
+                }
                 </React.Fragment>
+
+            footer = <div>Last updated: {changed}</div>
         }
 
         return(
-            <Page title="Agency">
+            <Page title="Agency" fixedFooter={footer}>
                 {pageContent}
             </Page>
         );
@@ -79,4 +65,16 @@ class AgencyPage extends React.Component{
 
 }
 
-export default AgencyPage;
+const mapStateToProps = state => {
+    return { 
+        agencies: state.agencies 
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    {
+        retrieveAgency: Actions.retrieveAgency,
+        retrieveAgencyTypes: Actions.retrieveAgencyTypes
+    }
+)(AgencyPage);

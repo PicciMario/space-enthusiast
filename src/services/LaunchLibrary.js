@@ -16,9 +16,16 @@ export function agencies(offset){
 }
 
 export function agencyByID(id){
-    console.warn('agencyByID')
+    let url = new URL(baseUrl + '/agency/' + id);
+    url.searchParams.append('mode', 'verbose');
     return RestCache
-        .retrieveUrl(baseUrl + '/agency/' + id);
+        .retrieveUrl(url);
+}
+
+export function agencyTypes(id){
+    let url = new URL(baseUrl + '/agencytype');
+    return RestCache
+        .retrieveUrl(url);
 }
 
 export function launchByID(id){
