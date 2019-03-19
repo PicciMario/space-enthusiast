@@ -84,7 +84,11 @@ class AgenciesPage extends Component{
         else {
             pageContent =         
                 list
-                .filter((agency) => filterString.length === 0 || agency.name.toUpperCase().startsWith(filterString.toUpperCase()))
+                .filter((agency) => 
+                    filterString.length === 0 
+                    || agency.name.toUpperCase().includes(filterString.toUpperCase())
+                    || agency.countryCode.toUpperCase().includes(filterString.toUpperCase())
+                )
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((agency) => 
                     <div key={agency.id}>

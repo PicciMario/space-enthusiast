@@ -24,6 +24,8 @@ class AgencyPage extends React.Component{
     }
 
     urlComponent(rawUrl){
+
+        if (rawUrl == null || rawUrl === '') return null;
         
         let urlText = rawUrl;
         let icon = <FontAwesomeIcon icon='link'/>;;

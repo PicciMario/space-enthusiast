@@ -40,7 +40,8 @@ export default function Agency(props){
 
             <div
                 style={{
-                    fontSize: '0.7em'
+                    fontSize: '0.7em',
+                    wordBreak: 'break-word'
                 }}
             >
                 {agency.countryCode}
