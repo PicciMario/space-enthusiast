@@ -16,10 +16,10 @@ import AgencyPage from './components/AgencyPage/';
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink} from '@fortawesome/free-solid-svg-icons';
-import {faYoutube, faWikipediaW, faTwitter} from '@fortawesome/free-brands-svg-icons';
+import {faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 library.add(
     faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink,
-    faYoutube, faWikipediaW, faTwitter
+    faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin
 );
 
 console.log(library)

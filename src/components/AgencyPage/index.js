@@ -25,19 +25,50 @@ class AgencyPage extends React.Component{
 
     urlComponent(rawUrl){
         
-        let url = new URL(rawUrl);
-        
+        let urlText = rawUrl;
         let icon = <FontAwesomeIcon icon='link'/>;;
-        if (url.hostname === 'www.youtube.com') icon=<FontAwesomeIcon icon={['fab', 'youtube']}/>;
-        if (url.hostname === 'en.wikipedia.org') icon=<FontAwesomeIcon icon={['fab', 'wikipedia-w']}/>;
-        if (url.hostname === 'twitter.com') icon=<FontAwesomeIcon icon={['fab', 'twitter']}/>;
+
+        try{
+            let url = new URL(rawUrl);
+            if (/\.youtube\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'youtube']}/>;
+            if (/\.wikipedia\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'wikipedia-w']}/>;
+            if (/twitter\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'twitter']}/>;
+            if (/\.facebook\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'facebook']}/>;
+            if (/\.linkedin\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'linkedin']}/>;
+            urlText = url.href;
+        }
+        catch (err){
+            console.warn('Invalid url: ' + rawUrl);
+        }
 
         return (
-            <div key={url}>
+            <div key={rawUrl}>
                 <a href={rawUrl} target="_blank" rel="noopener noreferrer">
-                    <span style={{whiteSpace: 'nowrap', display: 'block', textOverflow: 'ellipsis', overflow: 'hidden', verticalAlign: 'middle', lineHeight: '1.5em'}}>
-                        {icon} {rawUrl}
+
+                    <span 
+                        style={{
+                            whiteSpace: 'nowrap', 
+                            display: 'block',
+                            textOverflow: 'ellipsis', 
+                            overflow: 'hidden', 
+                            verticalAlign: 'middle', 
+                            lineHeight: '1.5em'
+                        }}
+                    >
+                    
+                        <span 
+                            style={{
+                                float:'left', 
+                                minWidth: 25
+                            }}
+                        >
+                            {icon}
+                        </span> 
+
+                        {urlText}
+
                     </span>
+
                 </a>
             </div>
         );
