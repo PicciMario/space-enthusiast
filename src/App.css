@@ -3,10 +3,6 @@
     margin: 0
 }
 
-h1{
-
-}
-
 /* Contenitore globale applicazione */
 .app-container{
     display: flex;
@@ -16,9 +12,23 @@ h1{
 /* Contenitore pagina */
 .page-container{
     flex-grow: 1;
-    overflow-Y: scroll;
+    overflow-Y: auto;
     margin-left: 5px;
     margin-right: 5px;    
+}
+/* ----- Variazioni per compatibilità desktop ------------------------------ */
+
+@media only screen and (min-width: 500px){
+    body{
+        height: calc(100% - 122px);
+    }
+    .app-container{
+        width: 500px;
+        margin: 50px auto;
+        padding: 10px;
+        border: 1px solid gray;
+        border-radius: 10px;
+    }
 }
 
 /* ----- Barra pulsanti top ------------------------------------------------ */
@@ -27,7 +37,7 @@ h1{
 .header-bar{
     display: flex;
     flex-direction: row;
-    height: 5%;
+    height: 20px;
     min-height: 40px;
     border: 1px solid black;
     margin-bottom: 5px;
@@ -75,7 +85,6 @@ h1{
     display: flex;
     flex-direction: row;
     margin-top: 5px;
-    height: 8%;
     min-height: 60px;
 }
 
