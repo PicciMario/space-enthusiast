@@ -1,64 +1,30 @@
 
 import React from 'react';
-import * as LaunchLibrary from '../../services/LaunchLibrary';
 import Page from '../BasePage/';
+import { connect } from "react-redux";
+import * as Actions from '../../redux/actions';
 
 class LaunchComponent extends React.Component{
 
     constructor(props){
-        
         super(props);
-
-        this.state = {
-            launchData: null,
-            error: false,
-            loading: true
-        }
-
+        this.state = {}
     }
 
     componentDidMount(){
-        
-        LaunchLibrary
-            .launchByID(this.props.match.params.launchID)
-            .then((data) => {
-                if (data && data.launches && data.launches.length > 0){
-                    this.setState({
-                        launchData: data.launches[0],
-                        error: false,
-                        loading: false
-                    });
-                }
-                else {
-                    this.setState({
-                        launchData: null,
-                        error: true,
-                        loading: false
-                    })
-                }
-
-            })
-            .catch(e => {
-                console.error(e);
-                this.setState({
-                    launchData: null,
-                    error: true,
-                    loading: false
-                })                
-            })
+        let {launchID} = this.props.match.params;
+        this.props.retrieveLaunch(launchID);
+        this.props.retrieveLaunchStatuses();
     }
 
     render(){
 
-        let {launchData, loading, error} = this.state;
+        let {launchID} = this.props.match.params;
+        let launchData = this.props.launches.details[launchID];
 
         let pageContent = null;
-
-        if (loading || !launchData){
+        if (!launchData){
             pageContent = <div>Loading...</div>
-        }
-        else if (error){
-            pageContent = <div>Loading error.</div>
         }
         else {
             pageContent =         
@@ -81,4 +47,16 @@ class LaunchComponent extends React.Component{
 
 }
 
-export default LaunchComponent;
+const mapStateToProps = state => {
+    return { 
+        launches: state.launches 
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { 
+        retrieveLaunch: Actions.retrieveLaunch,
+        retrieveLaunchStatuses: Actions.retrieveLaunchStatuses
+    }
+)(LaunchComponent);

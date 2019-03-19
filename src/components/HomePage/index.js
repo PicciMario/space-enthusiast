@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-import * as LaunchLibrary from '../../services/LaunchLibrary';
 import Launch from './Launch';
 import Page from '../BasePage/';
+import { connect } from "react-redux";
+import * as Actions from '../../redux/actions';
 
 class HomeComponent extends Component{
 
     constructor(props){
-
         super(props);
-
-        this.state = {
-            launches: []
-        }
-
+        this.state = {}
     }
 
     componentDidMount(){
-        LaunchLibrary.nextLaunches(10)
-        .then((data) => {
-            this.setState({launches: data.launches});
-        })
+        this.props.retrieveUpcomingLaunches();
     }
 
     render() {
+
+        let {upcoming} = this.props.launches;
 
         return(
             <Page title="Space Enthusiast">
                 <h1>Space Enthusiast</h1>
                 <h3>Upcoming launches:</h3>
                 {
-                    this.state.launches.map((launch) => 
+                    upcoming.map((launch) => 
                         <div onClick={() => this.props.history.push('/launch/' + launch.id)} key={launch.id}>
                             <Launch launch={launch}/>
                         </div>
@@ -42,4 +37,16 @@ class HomeComponent extends Component{
     
 }
 
-export default HomeComponent;
+const mapStateToProps = state => {
+    return { 
+        launches: state.launches 
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { 
+        retrieveUpcomingLaunches: Actions.retrieveUpcomingLaunches,
+        retrieveLaunch: Actions.retrieveLaunch
+    }
+)(HomeComponent);

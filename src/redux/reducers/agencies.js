@@ -35,11 +35,10 @@ export default function(state = initialState, action) {
                 ...state,
                 types: types
             }
-        }        
-
+        }      
+        
         default:
-            console.error('Azione non riconosciuta: ' + action.type);
-            return state;
+            return state;        
 
     }
 }

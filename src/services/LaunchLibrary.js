@@ -22,7 +22,7 @@ export function agencyByID(id){
         .retrieveUrl(url);
 }
 
-export function agencyTypes(id){
+export function agencyTypes(){
     let url = new URL(baseUrl + '/agencytype');
     return RestCache
         .retrieveUrl(url);
@@ -31,6 +31,12 @@ export function agencyTypes(id){
 export function launchByID(id){
     return RestCache
         .retrieveUrl(baseUrl + '/launch/' + id);
+}
+
+export function launchStatuses(){
+    let url = new URL(baseUrl + '/launchstatus');
+    return RestCache
+        .retrieveUrl(url);
 }
 
 export function providerByID(num){
