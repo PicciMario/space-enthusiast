@@ -5,8 +5,8 @@ const baseUrl = 'https://launchlibrary.net/1.4';
 // ----- Launches -------------------------------------------------------------
 
 export function nextLaunches(num){
-    let url = new URL(baseUrl + '/launch/falcon');
-    //url.searchParams.append('next', num);
+    let url = new URL(baseUrl + '/launch');
+    url.searchParams.append('next', num);
     url.searchParams.append('mode', 'list');
     return RestCache
         .retrieveUrl(url);
