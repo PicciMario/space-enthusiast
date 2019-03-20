@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/space-enthusiast/precache-manifest.a0f300312c5b5251a558ccabbe2dc0cc.js"
+  "/space-enthusiast/precache-manifest.cd956eb1c1f16b2a134988d52ac66852.js"
 );
 
 workbox.clientsClaim();
