@@ -19,14 +19,6 @@ export function launchByID(id){
         .retrieveUrl(url);
 }
 
-export function launchEventsByID(id){
-    let url = new URL(baseUrl + '/launchevent');
-    url.searchParams.append('parentid', id);
-    url.searchParams.append('mode', 'verbose');
-    return RestCache
-        .retrieveUrl(url);
-}
-
 export function launchStatuses(){
     let url = new URL(baseUrl + '/launchstatus');
     return RestCache
@@ -52,6 +44,16 @@ export function agencyByID(id){
 
 export function agencyTypes(){
     let url = new URL(baseUrl + '/agencytype');
+    return RestCache
+        .retrieveUrl(url);
+}
+
+// ----- Rockets --------------------------------------------------------------
+
+export function rocketFamilies(offset){
+    let url = new URL(baseUrl + '/rocketfamily');
+    url.searchParams.append('mode', 'verbose');
+    if (offset != null) url.searchParams.append('offset', offset);
     return RestCache
         .retrieveUrl(url);
 }

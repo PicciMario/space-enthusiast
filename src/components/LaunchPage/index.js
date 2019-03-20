@@ -15,7 +15,6 @@ class LaunchComponent extends React.Component{
         let {launchID} = this.props.match.params;
         this.props.retrieveLaunch(launchID);
         this.props.retrieveLaunchStatuses();
-        this.props.retrieveLaunchEvents(launchID);
     }
 
     render(){
@@ -30,7 +29,6 @@ class LaunchComponent extends React.Component{
         else {
             let launchStatuses = this.props.launches.statuses;
             let {name, lsp, net, status, rocket, location, missions} = launchData;
-            let events = this.props.launches.events[launchID];
 
             pageContent =         
                 <React.Fragment>
@@ -49,13 +47,7 @@ class LaunchComponent extends React.Component{
                     missions && missions.map((mission, count) => 
                         <div key={'mission'+count}><span style={{fontWeight:'bold'}}>{mission.name}</span> {mission.description}</div>
                     )
-                }
-
-                {
-                    events && events.map((event, count) => 
-                        <div key={'event'+count}><span style={{fontWeight:'bold'}}>{event.relativeTime}</span> {event.description}</div>
-                    )
-                }                
+                }              
 
                 <img src={rocket.imageURL} style={{width: '100%'}} alt={name}></img>
                 </React.Fragment>
@@ -81,7 +73,6 @@ export default connect(
     mapStateToProps,
     { 
         retrieveLaunch: Actions.retrieveLaunch,
-        retrieveLaunchStatuses: Actions.retrieveLaunchStatuses,
-        retrieveLaunchEvents: Actions.retrieveLaunchEvents
+        retrieveLaunchStatuses: Actions.retrieveLaunchStatuses
     }
 )(LaunchComponent);

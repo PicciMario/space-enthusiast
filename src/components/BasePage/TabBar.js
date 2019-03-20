@@ -19,6 +19,12 @@ export default function TabBar(props){
             />
 
             <TabBarButton
+                to={'/rocketfamilies'}
+                title={'Rocket families'}
+                icon={'space-shuttle'}
+            />                
+
+            <TabBarButton
                 to={'/about'}
                 title={'About'}
                 icon={'info'}

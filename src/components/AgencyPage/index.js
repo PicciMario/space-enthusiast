@@ -21,6 +21,7 @@ class AgencyPage extends React.Component{
         let {agencyID} = this.props.match.params;
         this.props.retrieveAgency(agencyID);
         this.props.retrieveAgencyTypes();
+        this.props.retrieveRocketFamilies();
     }
 
     urlComponent(rawUrl){
@@ -91,6 +92,9 @@ class AgencyPage extends React.Component{
 
             let {name, abbrev, countryCode, islsp, type, wikiURL, changed, infoURLs} = agencyData;
 
+            let rocketFamilies = this.props.rockets.families
+                .filter((family) => family.agencies && family.agencies.find((agency) => agency.id === Number(agencyID)))
+
             pageContent =         
                 <React.Fragment>
                 <h2>{name}</h2>
@@ -101,6 +105,17 @@ class AgencyPage extends React.Component{
                 {this.urlComponent(wikiURL)}
                 {
                     infoURLs.map((rawUrl) => this.urlComponent(rawUrl))
+                }
+                {
+                    rocketFamilies.length > 0 &&
+                    <React.Fragment>
+                    <div>Rockets:</div>
+                    <ul>
+                    {
+                        rocketFamilies.map((family) => <li key={family.id}>{family.name}</li>)
+                    }
+                    </ul>
+                    </React.Fragment>
                 }
                 </React.Fragment>
 
@@ -119,7 +134,8 @@ class AgencyPage extends React.Component{
 
 const mapStateToProps = state => {
     return { 
-        agencies: state.agencies 
+        agencies: state.agencies,
+        rockets: state.rockets
     };
 };
 
@@ -127,6 +143,7 @@ export default connect(
     mapStateToProps,
     {
         retrieveAgency: Actions.retrieveAgency,
-        retrieveAgencyTypes: Actions.retrieveAgencyTypes
+        retrieveAgencyTypes: Actions.retrieveAgencyTypes,
+        retrieveRocketFamilies: Actions.retrieveRocketFamilies
     }
 )(AgencyPage);

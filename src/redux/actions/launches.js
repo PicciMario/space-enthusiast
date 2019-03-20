@@ -14,14 +14,6 @@ export const addLaunch = (launch) => ({
     }
 });
 
-export const addLaunchEvents = (id, events) => ({
-    type: 'ADD_LAUNCH_EVENTS',
-    payload: {
-        id,
-        events
-    }
-});
-
 export const addLaunchStatuses = (statuses) => ({
     type: 'ADD_LAUNCH_STATUSES',
     payload: {
@@ -85,38 +77,6 @@ export function retrieveLaunch(id){
             })
             .catch(e => {
                 console.error('Error while retrieving launch', e);            
-            })     
-
-    }
-
-}
-
-/**
- * Retrieve events for a launch (if not already cached).
- * @param {*} agency id
- */
-export function retrieveLaunchEvents(id){
-
-    return (dispatch, getState) => {
-
-        if (getState().launches.events[id] != null) return;
-
-        LaunchLibrary
-            .launchEventsByID(id)
-            .then((data) => {
-                if (data && data.events){
-                    dispatch(addLaunchEvents(
-                        id,
-                        data.events
-                    ));
-                }
-                else {
-                    console.error('No data.events in received payload', data);
-                }
-
-            })
-            .catch(e => {
-                console.error('Error while retrieving launch events', e);            
             })     
 
     }

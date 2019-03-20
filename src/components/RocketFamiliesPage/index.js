@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import Agency from './Agency';
+import RocketFamily from './RocketFamily';
 import Page from '../BasePage/';
 import LoadingComponent from '../LoadingComponent';
 import * as Actions from '../../redux/actions';
 
-class AgenciesPage extends Component{
+class RocketFamiliesPage extends Component{
 
     constructor(props){
 
@@ -21,9 +21,6 @@ class AgenciesPage extends Component{
     }
 
     componentDidMount(){
-        // Tells redux to retrieve agencies list (if needed)
-        this.props.retrieveAgencies();
-
         this.props.retrieveRocketFamilies();
     }
 
@@ -57,7 +54,7 @@ class AgenciesPage extends Component{
         
     fixedFooter = () => {
 
-        let {totalRecords, lastRecordReceived} = this.props.agencies;
+        let {totalRecords, lastRecordReceived} = this.props.rockets;
 
         return(
             <div
@@ -75,32 +72,31 @@ class AgenciesPage extends Component{
     
     render() {
 
-        let {list} = this.props.agencies;
+        let {families} = this.props.rockets;
         let {filterString} = this.state;
 
         let pageContent = null;
 
-        if (list.length === 0){
+        if (families.length === 0){
             pageContent = <LoadingComponent/>
         }
         else {
             pageContent =         
-                list
-                .filter((agency) => 
+                families
+                .filter((family) => 
                     filterString.length === 0 
-                    || agency.name.toUpperCase().includes(filterString.toUpperCase())
-                    || agency.countryCode.toUpperCase().includes(filterString.toUpperCase())
+                    || family.name.toUpperCase().includes(filterString.toUpperCase())
                 )
                 .sort((a, b) => a.name.localeCompare(b.name))
-                .map((agency) => 
-                    <div key={agency.id}>
-                        <Agency agency={agency}/>
+                .map((family) => 
+                    <div key={family.id}>
+                        <RocketFamily family={family}/>
                     </div>
                 )
         }        
 
         return(
-            <Page title="Agencies" fixedHeader={this.filterHeader()} fixedFooter={this.fixedFooter()}>
+            <Page title="Rocket families" fixedHeader={this.filterHeader()} fixedFooter={this.fixedFooter()}>
                 {pageContent}  
             </Page>
         );
@@ -111,7 +107,7 @@ class AgenciesPage extends Component{
 
 const mapStateToProps = state => {
     return { 
-        agencies: state.agencies 
+        rockets: state.rockets
     };
 };
 
@@ -123,4 +119,4 @@ export default connect(
 
         retrieveRocketFamilies: Actions.retrieveRocketFamilies
     }
-)(AgenciesPage);
+)(RocketFamiliesPage);
