@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../services/History'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ListComponent from '../ListComponent';
 
 Agency.propTypes={
     agency: PropTypes.object.isRequired
@@ -15,39 +16,14 @@ export default function Agency(props){
 
     return (
 
-        <div
-            style={{
-                padding: 5,
-                border: '1px solid black',
-                borderRadius: 5,
-                marginBottom: 2,
-                cursor: 'pointer',
-            }}
+        <ListComponent
+            firstRow={agency.name}
+            secondRow={agency.countryCode}
+            icon={agency.islsp === 1 && <FontAwesomeIcon icon="rocket" alt='launch provider'/>}
+            iconTooltip={'Is a launch provider.'}
             onClick={() => history.push('/agency/' + agency.id)}
-        >
-            
-            <div
-                style={{
-                    fontSize: '1em',
-                }}
-            >
-                {agency.name}
-                {
-                    agency.islsp === 1 && 
-                    <FontAwesomeIcon icon="rocket" style={{fontSize: '0.7em', marginLeft: 5}}/>
-                }
-            </div>
+        />
 
-            <div
-                style={{
-                    fontSize: '0.7em',
-                    wordBreak: 'break-word'
-                }}
-            >
-                {agency.countryCode}
-            </div>
-
-        </div>
     );
 
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ListComponent from '../ListComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 Launch.propTypes={
@@ -48,54 +49,11 @@ export default function Launch(props){
     if (!launch) return null;
 
     return (
-
-        <div
-            style={{
-                padding: 5,
-                border: '1px solid black',
-                borderRadius: 5,
-                marginBottom: 2,
-                cursor: 'pointer',
-                display: 'flex'
-            }}
-        >
-
-            <div
-                style={{
-                    flexGrow: 1
-                }}
-            >
-            
-            <div
-                style={{
-                    fontSize: '1em',
-                }}
-            >
-                {launch.name}
-            </div>
-
-            <div
-                style={{
-                    fontSize: '0.8em'
-                }}
-            >
-                {launch.net}
-            </div>
-
-            </div>
-
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: 30,
-                    fontSize: '1.3em'
-                }}
-            >
-                {statusIcon(launch.status)}
-            </div>
-
-        </div>
+        <ListComponent
+            firstRow={launch.name}
+            secondRow={launch.net}   
+            icon={statusIcon(launch.status)}
+        />
     );
 
 }
