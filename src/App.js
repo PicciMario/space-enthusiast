@@ -16,10 +16,11 @@ import RocketFamiliesPage from './components/RocketFamiliesPage'
 // ##### Costruzione libreria icone FontAwesome ###############################
 
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle, faThumbsUp, faQuestionCircle, faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 library.add(
     faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle,
+    faThumbsUp, faQuestionCircle, faCheck, faTimes,
     faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin
 );
 
