@@ -1,13 +1,13 @@
 {
-  "main.css": "/space-enthusiast/static/css/main.a9e27522.chunk.css",
-  "main.js": "/space-enthusiast/static/js/main.2b901b32.chunk.js",
-  "main.js.map": "/space-enthusiast/static/js/main.2b901b32.chunk.js.map",
+  "main.css": "/space-enthusiast/static/css/main.27aa66f2.chunk.css",
+  "main.js": "/space-enthusiast/static/js/main.dd2c0c2f.chunk.js",
+  "main.js.map": "/space-enthusiast/static/js/main.dd2c0c2f.chunk.js.map",
   "runtime~main.js": "/space-enthusiast/static/js/runtime~main.0af08ccf.js",
   "runtime~main.js.map": "/space-enthusiast/static/js/runtime~main.0af08ccf.js.map",
-  "static/js/2.9d514b77.chunk.js": "/space-enthusiast/static/js/2.9d514b77.chunk.js",
-  "static/js/2.9d514b77.chunk.js.map": "/space-enthusiast/static/js/2.9d514b77.chunk.js.map",
+  "static/js/2.022ea30a.chunk.js": "/space-enthusiast/static/js/2.022ea30a.chunk.js",
+  "static/js/2.022ea30a.chunk.js.map": "/space-enthusiast/static/js/2.022ea30a.chunk.js.map",
   "index.html": "/space-enthusiast/index.html",
-  "precache-manifest.da9e918510344551f3463a2241a25020.js": "/space-enthusiast/precache-manifest.da9e918510344551f3463a2241a25020.js",
+  "precache-manifest.b1feee15e37240f2876bd4c4000577a6.js": "/space-enthusiast/precache-manifest.b1feee15e37240f2876bd4c4000577a6.js",
   "service-worker.js": "/space-enthusiast/service-worker.js",
-  "static/css/main.a9e27522.chunk.css.map": "/space-enthusiast/static/css/main.a9e27522.chunk.css.map"
+  "static/css/main.27aa66f2.chunk.css.map": "/space-enthusiast/static/css/main.27aa66f2.chunk.css.map"
 }
