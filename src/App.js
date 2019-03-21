@@ -11,7 +11,8 @@ import AboutPage from './components/AboutPage/';
 import LaunchPage from './components/LaunchPage/';
 import AgenciesPage from './components/AgenciesPage/';
 import AgencyPage from './components/AgencyPage/';
-import RocketFamiliesPage from './components/RocketFamiliesPage'
+import RocketFamiliesPage from './components/RocketFamiliesPage';
+import RocketFamilyPage from './components/RocketFamilyPage';
 
 // ##### Costruzione libreria icone FontAwesome ###############################
 
@@ -38,6 +39,7 @@ class App extends Component {
                 <Route exact path='/about' component={AboutPage}></Route>
                 <Route exact path='/agencies' component={AgenciesPage}></Route>
                 <Route exact path='/rocketfamilies' component={RocketFamiliesPage}></Route>
+                <Route exact path='/rocketFamily/:rocketFamilyID' component={RocketFamilyPage}></Route>
                 <Route path='/agency/:agencyID' component={AgencyPage}></Route>
                 <Route path='/launch/:launchID' component={LaunchPage}></Route>
             </div>

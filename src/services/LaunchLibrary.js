@@ -57,3 +57,11 @@ export function rocketFamilies(offset){
     return RestCache
         .retrieveUrl(url);
 }
+
+export function rocketsByFamily(id){
+    let url = new URL(baseUrl + '/rocket');
+    url.searchParams.append('mode', 'verbose');
+    url.searchParams.append('familyID', id);
+    return RestCache
+        .retrieveUrl(url);
+}

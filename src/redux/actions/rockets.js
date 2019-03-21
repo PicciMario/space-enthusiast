@@ -9,6 +9,14 @@ export const addRocketFamilies = (families, lastRecordReceived, totalRecords) =>
     }
 });
 
+export const addRocketsByFamily = (familyID, rockets) => ({
+    type: 'ADD_ROCKETS_BY_FAMILY',
+    payload: {
+        familyID,
+        rockets    
+    }
+});
+
 /**
  * Retrieve upcoming launches.
  */
@@ -49,6 +57,38 @@ export function retrieveRocketFamilies(offset){
             })
             .catch(e => {
                 console.error('Error while retrieving upcoming launches', e);
+            })        
+
+    }
+
+}
+
+/**
+ * Retrieve upcoming launches.
+ */
+export function retrieveRocketsByFamily(id){
+
+    return (dispatch, getState) => {
+
+        LaunchLibrary
+            .rocketsByFamily(id)
+            .then((data) => {
+
+                if (data && data.rockets){
+
+                    dispatch(addRocketsByFamily(
+                        id,
+                        data.rockets, 
+                    ));
+
+                }
+                else {
+                    console.error('No data.rockets in received payload', data);
+                }
+
+            })
+            .catch(e => {
+                console.error('Error while retrieving rockets', e);
             })        
 
     }

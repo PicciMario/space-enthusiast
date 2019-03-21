@@ -1,8 +1,9 @@
 
 const initialState = {
-    families: [],
+    families: [],    
     totalRecords: 0,
-    lastRecordReceived: 0    
+    lastRecordReceived: 0,
+    rocketsByFamily: {}
 };
 
 export default function(state = initialState, action) {
@@ -18,6 +19,14 @@ export default function(state = initialState, action) {
                 lastRecordReceived
             }
         }     
+        
+        case 'ADD_ROCKETS_BY_FAMILY': {
+            const {familyID, rockets} = action.payload;
+            return {
+                ...state,
+                rocketsByFamily: {...state.rocketsByFamily, [familyID]: rockets}
+            }
+        }            
         
         default:
             return state;

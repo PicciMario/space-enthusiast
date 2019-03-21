@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Page from '../BasePage/';
 import * as Actions from '../../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import history from '../../services/History';
 
 class AgencyPage extends React.Component{
 
@@ -110,11 +111,9 @@ class AgencyPage extends React.Component{
                     rocketFamilies.length > 0 &&
                     <React.Fragment>
                     <div>Rockets:</div>
-                    <ul>
                     {
-                        rocketFamilies.map((family) => <li key={family.id}>{family.name}</li>)
+                        rocketFamilies.map((family) => <div key={family.id} onClick={() => history.push('/rocketfamily/' + family.id)}>{family.name}</div>)
                     }
-                    </ul>
                     </React.Fragment>
                 }
                 </React.Fragment>
