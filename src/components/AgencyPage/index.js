@@ -5,18 +5,9 @@ import Page from '../BasePage/';
 import * as Actions from '../../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import history from '../../services/History';
+import ListComponent from '../ListComponent';
 
 class AgencyPage extends React.Component{
-
-    constructor(props){
-        
-        super(props);
-
-        this.state = {
-
-        }
-
-    }
 
     componentDidMount(){
         let {agencyID} = this.props.match.params;
@@ -96,23 +87,37 @@ class AgencyPage extends React.Component{
             let rocketFamilies = this.props.rockets.families
                 .filter((family) => family.agencies && family.agencies.find((agency) => agency.id === Number(agencyID)))
 
+            let links = [...infoURLs, wikiURL]
+
             pageContent =         
                 <React.Fragment>
-                <h2>{name}</h2>
-                <div>Abbreviation: {abbrev}</div>
+                <h2>{name} ({abbrev})</h2>
                 <div>Country: {countryCode}</div>
                 <div>Is launch provider: {islsp}</div>
                 <div>Type: {this.props.agencies.types[type]}</div>
-                {this.urlComponent(wikiURL)}
                 {
-                    infoURLs.map((rawUrl) => this.urlComponent(rawUrl))
+                    links.length > 0 &&
+                    <React.Fragment>
+                    <hr/>
+                    <h3>Links:</h3>
+                    {links.map((rawUrl, index) => <React.Fragment key={'link'+index}>{this.urlComponent(rawUrl)}</React.Fragment>)}
+                    </React.Fragment>
+                    
                 }
                 {
                     rocketFamilies.length > 0 &&
                     <React.Fragment>
-                    <div>Rockets:</div>
+                    <hr/>
+                    <h3>Rocket families:</h3>
                     {
-                        rocketFamilies.map((family) => <div key={family.id} onClick={() => history.push('/rocketfamily/' + family.id)}>{family.name}</div>)
+                        rocketFamilies.map((family) => 
+                            <ListComponent
+                                key={family.id}
+                                onClick={() => history.push('/rocketfamily/' + family.id)}
+                                firstRow={family.name}
+                                icon={<FontAwesomeIcon icon="arrow-circle-right"/>}
+                            />
+                        )
                     }
                     </React.Fragment>
                 }

@@ -17,11 +17,11 @@ import RocketFamilyPage from './components/RocketFamilyPage';
 // ##### Costruzione libreria icone FontAwesome ###############################
 
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle, faThumbsUp, faQuestionCircle, faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle, faThumbsUp, faQuestionCircle, faCheck, faTimes, faArrowCircleRight} from '@fortawesome/free-solid-svg-icons';
 import {faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 library.add(
     faHome, faRocket, faChevronLeft, faInfo, faBuilding, faLink, faSpaceShuttle,
-    faThumbsUp, faQuestionCircle, faCheck, faTimes,
+    faThumbsUp, faQuestionCircle, faCheck, faTimes, faArrowCircleRight,
     faYoutube, faWikipediaW, faTwitter, faFacebook, faLinkedin
 );
 
