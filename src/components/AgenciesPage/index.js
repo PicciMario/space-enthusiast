@@ -100,7 +100,12 @@ class AgenciesPage extends Component{
         }        
 
         return(
-            <Page title="Agencies" fixedHeader={this.filterHeader()} fixedFooter={this.fixedFooter()}>
+            <Page 
+                title="Agencies" 
+                fixedHeader={this.filterHeader()} 
+                fixedFooter={this.fixedFooter()} 
+                posKey='agenciesPos'
+            >
                 {pageContent}  
             </Page>
         );

@@ -96,7 +96,12 @@ class RocketFamiliesPage extends Component{
         }        
 
         return(
-            <Page title="Rocket families" fixedHeader={this.filterHeader()} fixedFooter={this.fixedFooter()}>
+            <Page 
+                title="Rocket families" 
+                fixedHeader={this.filterHeader()} 
+                fixedFooter={this.fixedFooter()}
+                posKey='rocketFamiliesPos'
+            >
                 {pageContent}  
             </Page>
         );

@@ -1,49 +1,101 @@
 import React from 'react';
 import HeaderBar from './HeaderBar';
 import TabBar from './TabBar';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import * as Actions from '../../redux/actions';
 
-export default function Page(props){
+class Page extends React.Component{
 
-    return(
+    static propTypes = {
 
-        <React.Fragment>
-                
-            <HeaderBar title={props.title}/>
+        // If specified, enables saving the scroll position of the main div
+        // into the redux keys reducer and restoring it on page mount.
+        posKey: PropTypes.string
+        
+    }
 
-            {
-                props.fixedHeader && 
-                <div 
-                    style={{
-                        marginLeft: 5,
-                        marginRight: 5,
-                        marginBottom: 5
-                    }}
-                >
-                    {props.fixedHeader}
-                </div>
+    componentDidMount(){
+        if (this.props.posKey){
+            if (this.containerRef && this.props.keys[this.props.posKey] != null){
+                setTimeout(() => this.containerRef.scrollTo(0, this.props.keys[this.props.posKey]));
             }
+            this.scrollEventListened = this.containerRef.addEventListener('scroll', this.onScroll);
+        }
+    }   
 
-            <div className='page-container'>
-                {props.children}
-            </div>
+    componentWillUnmount(){
+        this.containerRef.removeEventListener('scroll', this.onScroll);
+    }
 
-            {
-                props.fixedFooter && 
+    onScroll = () => {
+        let actualPos = this.containerRef.scrollTop;
+        let oldPos = this.props.keys[this.props.posKey];
+        if (oldPos == null || Math.abs(actualPos - oldPos) > 100){
+            this.props.setKey(this.props.posKey, actualPos);
+        }
+    }
+
+    render(){
+
+        return(
+
+            <React.Fragment>
+                    
+                <HeaderBar title={this.props.title}/>
+
+                {
+                    this.props.fixedHeader && 
+                    <div 
+                        style={{
+                            marginLeft: 5,
+                            marginRight: 5,
+                            marginBottom: 5
+                        }}
+                    >
+                        {this.props.fixedHeader}
+                    </div>
+                }
+
                 <div 
-                    style={{
-                        marginLeft: 5,
-                        marginRight: 5,
-                        marginTop: 5
-                    }}
+                    className='page-container'
+                    ref={(ref) => this.containerRef = ref}
                 >
-                    {props.fixedFooter}
+                    {this.props.children}
                 </div>
-            }
 
-            <TabBar/>
+                {
+                    this.props.fixedFooter && 
+                    <div 
+                        style={{
+                            marginLeft: 5,
+                            marginRight: 5,
+                            marginTop: 5
+                        }}
+                    >
+                        {this.props.fixedFooter}
+                    </div>
+                }
 
-        </React.Fragment>        
+                <TabBar/>
 
-    );
+            </React.Fragment>        
+
+        );
+    
+    }
 
 }
+
+const mapStateToProps = state => {
+    return { 
+        keys: state.keys 
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { 
+        setKey: Actions.setKey
+    }
+)(Page);
