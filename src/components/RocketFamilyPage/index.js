@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Page from '../BasePage/';
+import RocketComponent from './RocketComponent';
 import { connect } from "react-redux";
 import * as Actions from '../../redux/actions';
 
@@ -37,7 +38,12 @@ class RocketFamilyPage extends React.Component{
                 <h2>{name}</h2>
                 {
                     rockets &&
-                    rockets.map((rocket) => <div>{rocket.name}</div>)
+                    rockets.map((rocket) => 
+                        <React.Fragment key={rocket.id}>
+                            <RocketComponent rocketData={rocket}/>
+                            <hr/>
+                        </React.Fragment>
+                    )
                 }
                 </React.Fragment>
         }

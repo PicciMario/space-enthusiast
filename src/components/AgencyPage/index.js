@@ -6,6 +6,7 @@ import * as Actions from '../../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import history from '../../services/History';
 import ListComponent from '../ListComponent';
+import URLComponent from '../URLComponent';
 
 class AgencyPage extends React.Component{
 
@@ -14,60 +15,6 @@ class AgencyPage extends React.Component{
         this.props.retrieveAgency(agencyID);
         this.props.retrieveAgencyTypes();
         this.props.retrieveRocketFamilies();
-    }
-
-    urlComponent(rawUrl){
-
-        if (rawUrl == null || rawUrl === '') return null;
-        
-        let urlText = rawUrl;
-        let icon = <FontAwesomeIcon icon='link'/>;;
-
-        try{
-            let url = new URL(rawUrl);
-            if (/\.youtube\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'youtube']}/>;
-            if (/\.wikipedia\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'wikipedia-w']}/>;
-            if (/twitter\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'twitter']}/>;
-            if (/\.facebook\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'facebook']}/>;
-            if (/\.linkedin\./.test(url.hostname)) icon=<FontAwesomeIcon icon={['fab', 'linkedin']}/>;
-            urlText = url.href;
-        }
-        catch (err){
-            console.warn('Invalid url: ' + rawUrl);
-        }
-
-        return (
-            <div key={rawUrl}>
-                <a href={rawUrl} target="_blank" rel="noopener noreferrer">
-
-                    <span 
-                        style={{
-                            whiteSpace: 'nowrap', 
-                            display: 'block',
-                            textOverflow: 'ellipsis', 
-                            overflow: 'hidden', 
-                            verticalAlign: 'middle', 
-                            lineHeight: '1.5em'
-                        }}
-                    >
-                    
-                        <span 
-                            style={{
-                                float:'left', 
-                                minWidth: 25
-                            }}
-                        >
-                            {icon}
-                        </span> 
-
-                        {urlText}
-
-                    </span>
-
-                </a>
-            </div>
-        );
-
     }
 
     render(){
@@ -100,7 +47,7 @@ class AgencyPage extends React.Component{
                     <React.Fragment>
                     <hr/>
                     <h3>Links:</h3>
-                    {links.map((rawUrl, index) => <React.Fragment key={'link'+index}>{this.urlComponent(rawUrl)}</React.Fragment>)}
+                    {links.map((rawUrl, index) => <React.Fragment key={'link'+index}><URLComponent url={rawUrl}/></React.Fragment>)}
                     </React.Fragment>
                     
                 }
