@@ -14,6 +14,7 @@ class LaunchComponent extends React.Component{
     componentDidMount(){
         let {launchID} = this.props.match.params;
         this.props.retrieveLaunch(launchID);
+        this.props.retrieveLaunchSLN(launchID);
         this.props.retrieveLaunchStatuses();
     }
 
@@ -73,6 +74,8 @@ export default connect(
     mapStateToProps,
     { 
         retrieveLaunch: Actions.retrieveLaunch,
-        retrieveLaunchStatuses: Actions.retrieveLaunchStatuses
+        retrieveLaunchStatuses: Actions.retrieveLaunchStatuses,
+        retrieveLaunchSLN: Actions.retrieveLaunchSLN
+
     }
 )(LaunchComponent);

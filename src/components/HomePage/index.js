@@ -47,6 +47,6 @@ export default connect(
     mapStateToProps,
     { 
         retrieveUpcomingLaunches: Actions.retrieveUpcomingLaunches,
-        retrieveLaunch: Actions.retrieveLaunch
+        retrieveLaunchSLN: Actions.retrieveLaunchSLN
     }
 )(HomeComponent);

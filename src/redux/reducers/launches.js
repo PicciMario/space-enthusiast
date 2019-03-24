@@ -2,7 +2,8 @@
 const initialState = {
     upcoming: [],
     details: {},
-    statuses: {}
+    statuses: {},
+    details_sln: {}
 };
 
 export default function(state = initialState, action) {
@@ -23,7 +24,15 @@ export default function(state = initialState, action) {
                 ...state,
                 details: {...state.details, [launch.id]: launch}
             }
-        }              
+        }   
+
+        case 'ADD_LAUNCH_SLN': {
+            const {launch} = action.payload;
+            return {
+                ...state,
+                details_sln: {...state.details_sln, [launch.id]: launch}
+            }
+        }                    
         
         case 'ADD_LAUNCH_STATUSES': {
             const {statuses} = action.payload;

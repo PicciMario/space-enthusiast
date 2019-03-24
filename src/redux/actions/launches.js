@@ -1,4 +1,5 @@
-import * as LaunchLibrary from '../../services/LaunchLibrary'
+import * as LaunchLibrary from '../../services/LaunchLibrary';
+import * as SpaceLaunchNow from '../../services/SpaceLaunchNow';
 
 export const addUpcomingLaunches = (launches) => ({
     type: 'ADD_UPCOMING_LAUNCHES',
@@ -9,6 +10,13 @@ export const addUpcomingLaunches = (launches) => ({
 
 export const addLaunch = (launch) => ({
     type: 'ADD_LAUNCH',
+    payload: {
+        launch
+    }
+});
+
+export const addLaunchSLN = (launch) => ({
+    type: 'ADD_LAUNCH_SLN',
     payload: {
         launch
     }
@@ -67,6 +75,37 @@ export function retrieveLaunch(id){
             .then((data) => {
                 if (data && data.launches && data.launches.length > 0){
                     dispatch(addLaunch(
+                        data.launches[0]
+                    ));
+                }
+                else {
+                    console.error('No data.launches in received payload', data);
+                }
+
+            })
+            .catch(e => {
+                console.error('Error while retrieving launch', e);            
+            })     
+
+    }
+
+}
+
+/**
+ * Retrieve a launch (if not already cached).
+ * @param {*} agency id
+ */
+export function retrieveLaunchSLN(id){
+
+    return (dispatch, getState) => {
+
+        if (getState().launches.details_sln[id] != null) return;
+
+        SpaceLaunchNow
+            .launchByLibraryID(id)
+            .then((data) => {
+                if (data && data.launches && data.launches.length > 0){
+                    dispatch(addLaunchSLN(
                         data.launches[0]
                     ));
                 }

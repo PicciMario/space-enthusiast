@@ -40,12 +40,12 @@ class AgenciesPage extends Component{
         >   
             Filter:
             <input 
-                type="text" 
+                type="search" 
                 value={this.state.filterString}
                 onChange={this.manageFilterChange}
                 style={{
                     flexGrow: 1,
-                    marginLeft: 5,
+                    marginLeft: 5
                 }}
             />
             <button
