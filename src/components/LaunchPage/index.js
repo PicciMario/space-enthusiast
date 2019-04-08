@@ -3,6 +3,9 @@ import React from 'react';
 import Page from '../BasePage/';
 import { connect } from "react-redux";
 import * as Actions from '../../redux/actions';
+import URLComponent from '../URLComponent';
+import history from '../../services/History';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class LaunchComponent extends React.Component{
 
@@ -27,29 +30,60 @@ class LaunchComponent extends React.Component{
             pageContent = <div>Loading...</div>
         }
         else {
+
             let launchStatuses = this.props.launches.statuses;
-            let {name, lsp, net, status, rocket, location, missions} = launchData;
+
+            let {name, lsp, net, status, rocket, location, missions, vidURLs, infoURLs} = launchData;
 
             pageContent =         
+
                 <React.Fragment>
-                <h2>{name}</h2>
-                <div>Provider: {lsp.name}</div>
-                <div>NET: {net}</div>
-                <div>Status: {launchStatuses[status]}</div>
 
-                <div>Rocket: {rocket.name}</div>
+                    <h2>{name}</h2>
 
-                <div>Location: {location.name}</div>
+                    <div onClick={() => history.push('/agency/' + lsp.id)}>
+                        Provider: {lsp.name} <FontAwesomeIcon icon='link' style={{cursor: "pointer", fontSize: "small"}}/>
+                    </div>
+                    
+                    <div>NET: {net}</div>
 
-                <div>Pad: {location.pads.map((pad) => pad.name)}</div>
+                    <div>Status: {launchStatuses[status]}</div>
 
-                {
-                    missions && missions.map((mission, count) => 
-                        <div key={'mission'+count}><span style={{fontWeight:'bold'}}>{mission.name}</span> {mission.description}</div>
-                    )
-                }              
+                    <div>Rocket: {rocket.name} </div>
 
-                <img src={rocket.imageURL} style={{width: '100%'}} alt={name}></img>
+                    <div>Location: {location.name}</div>
+
+                    <div>Pad: {location.pads.map((pad) => pad.name)}</div>
+
+                    {
+                        vidURLs != null &&
+                        vidURLs.map((url) => <URLComponent key={url} url={url}/>)
+                    }
+                    {
+                        infoURLs != null &&
+                        infoURLs.map((url) => <URLComponent key={url} url={url}/>)
+                    }                    
+
+                    {
+                        missions && 
+                            <React.Fragment>
+                                <h3>Missions:</h3>
+                                {
+                                    missions.map((mission, count) => 
+                                        <div key={'mission'+count}>
+                                            <span style={{fontWeight:'bold'}}>{mission.name} </span> 
+                                            {
+                                                mission.typeName && <span>({mission.typeName}) </span>
+                                            }
+                                            {mission.description}
+                                        </div>
+                                    )
+                                }
+                            </React.Fragment>
+                    }              
+
+                    <img src={rocket.imageURL} style={{width: '100%'}} alt={name}></img>
+
                 </React.Fragment>
         }
 

@@ -15,7 +15,7 @@ export default class urlComponent extends React.Component{
         if (url == null || url === '') return null;
         
         let urlText = url;
-        let icon = <FontAwesomeIcon icon='link'/>;;
+        let icon = <FontAwesomeIcon icon='link'/>;
 
         try{
             let urlObject = new URL(url);
