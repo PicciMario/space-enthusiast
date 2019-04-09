@@ -4,6 +4,7 @@ import Page from '../BasePage/';
 import { connect } from "react-redux";
 import * as Actions from '../../redux/actions';
 import URLComponent from '../URLComponent';
+import ImageComponent from '../ImageComponent';
 import history from '../../services/History';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -41,6 +42,19 @@ class LaunchComponent extends React.Component{
 
                     <h2>{name}</h2>
 
+                    <ImageComponent
+                        url={rocket.imageURL}
+                        sizes={rocket.imageSizes}
+                        alt={name}
+                        style={{
+                            marginTop: 10,
+                            marginBottom: 10,
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto'
+                        }}
+                    />                    
+
                     <div onClick={() => history.push('/agency/' + lsp.id)}>
                         Provider: {lsp.name} <FontAwesomeIcon icon='link' style={{cursor: "pointer", fontSize: "small"}}/>
                     </div>
@@ -65,7 +79,7 @@ class LaunchComponent extends React.Component{
                     }                    
 
                     {
-                        missions && 
+                        missions && missions.length > 0 &&
                             <React.Fragment>
                                 <h3>Missions:</h3>
                                 {
@@ -81,8 +95,6 @@ class LaunchComponent extends React.Component{
                                 }
                             </React.Fragment>
                     }              
-
-                    <img src={rocket.imageURL} style={{width: '100%'}} alt={name}></img>
 
                 </React.Fragment>
         }
