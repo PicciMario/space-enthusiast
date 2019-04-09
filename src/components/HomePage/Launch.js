@@ -44,15 +44,17 @@ function statusIcon(status){
 
 export default function Launch(props){
 
-    let {launch} = props;
+    if (!props.launch) return null;
+    let {name, net, status} = props.launch;
 
-    if (!launch) return null;
+    let date = new Date(net);
+
 
     return (
         <ListComponent
-            firstRow={launch.name}
-            secondRow={launch.net}   
-            icon={statusIcon(launch.status)}
+            firstRow={name}
+            secondRow={date.toString()}   
+            icon={statusIcon(status)}
         />
     );
 
